@@ -8,6 +8,9 @@ import TargetIcon from "@/components/icons/TargetIcon";
 import JumpToLocation from "@/components/maps/Extensions/JumpToLocation";
 import FormTextField from "@/components/common/FormTextField";
 import GeoLocUtil from "@/utils/geolocation.util";
+import { LocationMarkerSVG } from "@/assets/svg/map/location-marker-svg";
+import { generateMapMarkerIcon } from "@/components/maps/utils";
+import { Marker } from "@/components/maps/ClientMap";
 
 export default function PortalPageContent(): ReactElement {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(
@@ -30,16 +33,28 @@ export default function PortalPageContent(): ReactElement {
 
   return (
     <Stack alignItems={"center"} justifyContent={"center"} py={1}>
-      <Stack gap={1} width={300}>
+      <Stack gap={1} height={500} width={800}>
         {geoError && <Typography color="error">{geoError}</Typography>}
 
         <FormTextField label="Location name" />
-        <LocationMap height={200} width={"100%"}>
+        <LocationMap height={"100%"} width={"100%"}>
           <JumpToLocation
             animation={true}
             animationSpeed={4}
             location={userLocation}
           />
+          {userLocation !== null && (
+            <Marker
+              riseOnHover
+              eventHandlers={{
+                click: () => {
+                  console.log("Hovered over marker");
+                },
+              }}
+              position={userLocation}
+              icon={generateMapMarkerIcon({ iconUrl: LocationMarkerSVG })}
+            />
+          )}
         </LocationMap>
         <EZButton startIcon={<TargetIcon />} onClick={handleGetLocation}>
           Use my location

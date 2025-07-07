@@ -1,5 +1,12 @@
 import { type ResponseData } from "@/interface/core";
 
+/**
+ * Gets the current geographical location of the user's device using the browser's Geolocation API.
+ *
+ * @returns {Promise<ResponseData<{ lat: number; lng: number }>>}
+ * A promise that resolves with an object containing latitude and longitude if successful,
+ * or rejects with an error message if geolocation is not supported or permission is denied.
+ */
 const getCurrentLocation = (): Promise<
   ResponseData<{ lat: number; lng: number }>
 > => {
