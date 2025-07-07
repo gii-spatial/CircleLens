@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Box from "@mui/material/Stack";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
 
@@ -26,7 +27,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <Box
+          sx={{
+            height: "100vh",
+            minHeight: "100vh",
+            width: "100vw",
+            minWidth: "100vw",
+            "@supports (height: 100dvh)": {
+              height: "100dvh",
+              minHeight: "100dvh",
+            },
+            "@supports (height: 100dvw)": {
+              width: "100dvw",
+              minWidth: "100dvw",
+            },
+          }}
+        >
+          {children}
+        </Box>
       </body>
     </html>
   );

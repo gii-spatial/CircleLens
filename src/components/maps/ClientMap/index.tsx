@@ -40,6 +40,12 @@ const LazyMarker = dynamic(
 export const Marker = forwardRef<MarkerType, Omit<MarkerProps, "forwardedRef">>(
   (props, ref) => <LazyMarker {...props} forwardedRef={ref} />
 );
+
+export const Popup = dynamic(
+  async () => import("react-leaflet").then((m) => m.Popup),
+  { ssr: false }
+);
+
 export interface MapConsumerProps {
   eventsHandler: LeafletEventHandlerFnMap;
 }

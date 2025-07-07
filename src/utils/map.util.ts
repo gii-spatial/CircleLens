@@ -21,6 +21,9 @@ function generateMapMarkerIcon(props: GenerateMapMarkerIcon): IconOptions {
     iconSize = DEF_ICON_SIZE,
   } = props;
 
+  const [_, height] = DEF_ICON_SIZE as [number, number];
+  const popupAnchor: PointExpression = [0, -height / 2];
+
   /**
    * 👀 Extend more here, examples:
    *  - shadowAnchor
@@ -30,6 +33,7 @@ function generateMapMarkerIcon(props: GenerateMapMarkerIcon): IconOptions {
     iconUrl,
     iconAnchor,
     iconSize,
+    popupAnchor,
   };
 }
 
